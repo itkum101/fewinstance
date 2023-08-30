@@ -1,0 +1,18 @@
+version: "3.2"
+services:
+  backend:
+    build: ./
+    volumes:
+      - ./:/app/backend
+    ports:
+      - "8091:8091"
+    command: python3 manage.py runserver 0.0.0.0:8091
+  frontend:
+    build: ./priority-analyser-frontend
+    volumes:
+      - ./priority-analyser-frontend:/app/frontend
+    ports:
+      - "8092:8092"
+    depends_on:
+      - backend
+    command: npm start
